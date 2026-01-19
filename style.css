@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* Base Reset */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #121212;
+    color: white;
+    overflow: hidden; 
+    -webkit-tap-highlight-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideInRight { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+.animate-fade-in { animation: fadeIn 0.3s ease-out; }
+.animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.animate-slide-right { animation: slideInRight 0.3s ease-out; }
+
+/* Custom Scrollbar */
+.custom-scrollbar {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #333 #121212;
+}
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #dc2626; }
+
+/* Safe Area & Layout Utilities */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Form Elements */
+input, select, textarea {
+    transition: all 0.2s;
+    outline: none;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.2);
+}
+
+/* Navigation State */
+.nav-btn.active { color: #ef4444; }
+.nav-btn.active svg { stroke-width: 2.5px; stroke: #ef4444; }
+.nav-btn { color: #737373; transition: color 0.2s; }
+
+/* Phase Specific Styling - Recovery Mode */
+.phase-recovery header {
+    border-bottom-color: rgba(16, 185, 129, 0.3);
+}
+.phase-recovery .text-red-600, 
+.phase-recovery .text-red-500,
+.phase-recovery .text-red-400 {
+    color: #34d399 !important; /* Emerald Green */
+}
+.phase-recovery .bg-red-600,
+.phase-recovery .bg-red-500 {
+    background-color: #059669 !important;
+}
+.phase-recovery #phase-controller {
+    border-color: #10b981;
+    color: #34d399;
+}
+.phase-recovery .nav-btn.active { color: #34d399 !important; }
+.phase-recovery .nav-btn.active svg { stroke: #34d399 !important; stroke-width: 2.5px; }
+
+
