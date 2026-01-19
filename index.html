@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Coach OS // Ferrari Engine</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex flex-col h-screen bg-[#121212] text-white">
+
+    <!-- HEADER -->
+    <header class="bg-neutral-900/95 backdrop-blur-md p-4 sticky top-0 z-20 border-b border-red-900/30 flex-none space-y-3">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i data-lucide="activity" class="text-red-600 w-6 h-6"></i>
+                <span class="font-bold tracking-wider text-lg italic">COACH<span class="text-red-600">OS</span></span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button onclick="app.openModal('profile')" class="flex items-center space-x-2 group">
+                    <div class="text-right hidden sm:block">
+                        <div class="text-[10px] text-neutral-400 uppercase tracking-widest">Operator</div>
+                        <div class="text-xs font-bold text-white group-hover:text-red-400 transition-colors">TONIO GENETICS</div>
+                    </div>
+                    <div class="w-8 h-8 bg-neutral-800 rounded-full border border-red-600/50 flex items-center justify-center group-hover:border-red-500 transition-colors relative">
+                        <i data-lucide="user" class="w-4 h-4 text-neutral-300"></i>
+                        <div class="absolute -bottom-1 -right-1 bg-red-600 rounded-full p-0.5"><i data-lucide="settings-2" class="w-2 h-2 text-white"></i></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- PHASE CONTROLLER (Manual Gearbox) -->
+        <div class="relative group">
+            <label class="absolute -top-2 left-2 px-1 bg-neutral-900 text-[9px] font-bold text-neutral-500 uppercase tracking-widest z-10">Phase Override</label>
+            <div class="relative">
+                <select id="phase-controller" onchange="app.actions.setPhase(this.value)" class="w-full bg-neutral-950 border border-neutral-700 rounded-lg py-2.5 px-3 text-xs font-mono text-white focus:border-red-500 outline-none uppercase appearance-none text-center font-bold tracking-wide transition-all cursor-pointer hover:border-neutral-500">
+                    <option value="1">Hypertrophy (3x10-12)</option>
+                    <option value="2">Strength (5x3-5)</option>
+                    <option value="3">Power (4x3 Explosive)</option>
+                    <option value="recovery">RECOVERY MODE (Mobility)</option>
+                </select>
+                <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <i data-lucide="chevrons-up-down" class="w-3 h-3 text-neutral-500"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APP CONTAINER -->
+    <main id="app-root" class="flex-1 overflow-hidden relative w-full bg-[#121212]">
+        <!-- Views are injected here -->
+    </main>
+
+    <!-- NAVIGATION -->
+    <nav class="flex-none bg-neutral-900 border-t border-neutral-800 pb-safe px-6 flex justify-between items-center z-30 h-[80px]">
+        <button onclick="app.switchTab('dashboard')" class="nav-btn group flex flex-col items-center space-y-1 w-16" id="nav-dashboard">
+            <i data-lucide="layout-dashboard" class="w-6 h-6 transition-all group-active:scale-95"></i>
+            <span class="text-[10px] font-medium tracking-wide">Dash</span>
+        </button>
+        <button onclick="app.switchTab('training')" class="nav-btn group flex flex-col items-center space-y-1 w-16" id="nav-training">
+            <i data-lucide="dumbbell" class="w-6 h-6 transition-all group-active:scale-95"></i>
+            <span class="text-[10px] font-medium tracking-wide">Train</span>
+        </button>
+        <button onclick="app.switchTab('fuel')" class="nav-btn group flex flex-col items-center space-y-1 w-16" id="nav-fuel">
+            <i data-lucide="utensils" class="w-6 h-6 transition-all group-active:scale-95"></i>
+            <span class="text-[10px] font-medium tracking-wide">Fuel</span>
+        </button>
+        <button onclick="app.switchTab('tech')" class="nav-btn group flex flex-col items-center space-y-1 w-16" id="nav-tech">
+            <i data-lucide="zap" class="w-6 h-6 transition-all group-active:scale-95"></i>
+            <span class="text-[10px] font-medium tracking-wide">Tech</span>
+        </button>
+    </nav>
+
+    <!-- ONBOARDING MODAL -->
+    <div id="onboarding-layer" class="hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-4 animate-fade-in">
+        <div class="bg-neutral-900 w-full max-w-sm rounded-2xl border border-neutral-800 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="p-6 text-center border-b border-neutral-800">
+                <i data-lucide="cpu" class="w-12 h-12 text-red-600 mx-auto mb-2"></i>
+                <h1 class="text-2xl font-black italic tracking-tighter">COACH <span class="text-red-600">OS</span></h1>
+                <p class="text-neutral-500 font-mono text-[10px]">INITIALIZING SYSTEM ARCHITECTURE...</p>
+            </div>
+            
+            <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
+                <!-- Step 1: Vitals -->
+                <div>
+                    <h3 class="text-xs font-bold text-white uppercase mb-3 flex items-center"><span class="bg-red-600 text-black px-1.5 py-0.5 rounded mr-2">1</span> Vitals</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="text-[9px] text-neutral-500 font-bold block mb-1">WEIGHT</label><input type="number" id="setup-weight" class="w-full bg-neutral-950 border border-neutral-700 rounded p-2 text-white font-mono text-sm" placeholder="140"></div>
+                        <div><label class="text-[9px] text-neutral-500 font-bold block mb-1">DIET MODE</label>
+                            <select id="setup-diet" class="w-full bg-neutral-950 border border-neutral-700 rounded p-2 text-white text-xs">
+                                <option value="gain">Gain Muscle</option>
+                                <option value="lose">Lose Fat</option>
+                                <option value="maintain">Maintain</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Specific Goals -->
+                <div>
+                    <h3 class="text-xs font-bold text-white uppercase mb-3 flex items-center"><span class="bg-red-600 text-black px-1.5 py-0.5 rounded mr-2">2</span> Mission Objectives</h3>
+                    <div class="space-y-3">
+                        <div><label class="text-[9px] text-neutral-500 font-bold block mb-1">PHYSIQUE GOAL</label><input id="setup-goal-physique" class="w-full bg-neutral-950 border border-neutral-700 rounded p-2 text-white text-xs" placeholder="e.g. 155lbs Lean"></div>
+                        <div><label class="text-[9px] text-neutral-500 font-bold block mb-1">STRENGTH GOAL</label><input id="setup-goal-strength" class="w-full bg-neutral-950 border border-neutral-700 rounded p-2 text-white text-xs" placeholder="e.g. 350lb Squat"></div>
+                        <div><label class="text-[9px] text-neutral-500 font-bold block mb-1">PERFORMANCE GOAL</label><input id="setup-goal-perf" class="w-full bg-neutral-950 border border-neutral-700 rounded p-2 text-white text-xs" placeholder="e.g. Dunk on 10ft"></div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Injury Config -->
+                <div>
+                    <h3 class="text-xs font-bold text-red-500 uppercase mb-3 flex items-center"><span class="bg-red-900 text-red-200 px-1.5 py-0.5 rounded mr-2">3</span> Injury Protocol</h3>
+                    <div class="bg-red-900/10 border border-red-900/30 p-3 rounded-lg mb-3">
+                        <div class="grid grid-cols-2 gap-2 mb-2">
+                            <select id="setup-injury-part" onchange="app.actions.updateSetupInjuryDropdown()" class="bg-neutral-900 text-white text-xs p-2 rounded border border-neutral-800 w-full">
+                                <option value="">Select Part</option>
+                                <!-- Populated by JS -->
+                            </select>
+                            <select id="setup-injury-issue" class="bg-neutral-900 text-white text-xs p-2 rounded border border-neutral-800 w-full">
+                                <option value="">Select Issue</option>
+                            </select>
+                        </div>
+                        <button onclick="app.actions.addSetupInjury()" class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-bold py-2 rounded transition-colors">ADD TO PROFILE</button>
+                    </div>
+                    <div id="setup-injury-list" class="space-y-1">
+                        <!-- Injuries added here -->
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="text-[9px] text-neutral-500 font-bold block mb-1">PROGRAM DURATION</label>
+                    <select id="setup-duration" class="w-full bg-neutral-950 border border-neutral-700 rounded p-2 text-white text-xs">
+                        <option value="8">8 Weeks (Blitz)</option>
+                        <option value="12" selected>12 Weeks (Standard)</option>
+                        <option value="24">24 Weeks (Macro)</option>
+                        <option value="52">52 Weeks (Year)</option>
+                    </select>
+                </div>
+
+                <button onclick="app.actions.finishOnboarding()" class="w-full bg-white text-black font-black italic uppercase py-4 rounded-xl tracking-wider hover:bg-gray-200 transition-colors shadow-lg shadow-white/10">
+                    LAUNCH SYSTEM
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GENERAL MODAL LAYER -->
+    <div id="modal-layer" class="relative z-50"></div>
+
+    <!-- APP LOGIC -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+
