@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.animate-fade-in { animation: fadeIn 0.4s ease-out; }
+.animate-slide-up { animation: slideUp 0.4s ease-out; }
+.animate-zoom-in { animation: zoomIn 0.3s ease-out; }
+
+/* Scrollbar */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: #121212; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Utility Classes */
+.phase-recovery {
+    background-color: #064e3b !important; /* Green for recovery */
+    border-color: #10b981 !important;
+}
+
+.text-recovery {
+    color: #34d399 !important;
+}
+
+.bg-recovery {
+    background-color: #064e3b !important;
+}
+
+
